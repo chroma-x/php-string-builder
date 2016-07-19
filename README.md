@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/markenwerk/php-simple-string-builder.svg?branch=master)](https://travis-ci.org/markenwerk/php-simple-string-builder)
 [![Test Coverage](https://codeclimate.com/github/markenwerk/php-simple-string-builder/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-simple-string-builder/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/578e8a2d88bf880039f7e56f/badge.svg)](https://www.versioneye.com/user/projects/578e8a2d88bf880039f7e56f)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/925a6e2e-e131-4426-826e-2ed9a7f9213d.svg)](https://insight.sensiolabs.com/projects/925a6e2e-e131-4426-826e-2ed9a7f9213d)
 [![Code Climate](https://codeclimate.com/github/markenwerk/php-simple-string-builder/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-simple-string-builder)
 [![Latest Stable Version](https://poser.pugx.org/markenwerk/simple-string-builder/v/stable)](https://packagist.org/packages/markenwerk/simple-string-builder)
 [![Total Downloads](https://poser.pugx.org/markenwerk/simple-string-builder/downloads)](https://packagist.org/packages/markenwerk/simple-string-builder)

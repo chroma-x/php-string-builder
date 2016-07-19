@@ -1,0 +1,30 @@
+{
+  "name": "markenwerk/simple-string-builder",
+  "type": "library",
+  "description": "A basic string builder library providing different string methods written in PHP.",
+  "keywords": [
+    "String",
+    "Builder"
+  ],
+  "homepage": "http://markenwerk.net/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Martin Brecht-Precht",
+      "email": "mb@markenwerk.net",
+      "homepage": "http://markenwerk.net"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Markenwerk\\SimpleStringBuilder\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.8",
+    "codeclimate/php-test-reporter": "dev-master"
+  }
+}

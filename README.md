@@ -39,7 +39,6 @@ $builder = new SimpleStringBuilder();
 $builder
 	->append('a')
 	->append(12)
-	->append(array('a'))
 	->append(false)
 	->append(true);
 
@@ -50,7 +49,7 @@ fwrite(STDOUT, 'Result "' . $string . '"' . PHP_EOL);
 will output the following
 
 ```{http}
-Result "a12Array1"
+Result "a121"
 ```
 
 ---

@@ -17,10 +17,9 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase{
 		$builder
 			->append('a')
 			->append(12)
-			->append(array('a'))
 			->append(false)
 			->append(true);
-		$this->assertEquals('a12Array1', $builder->toString());
+		$this->assertEquals('a121', $builder->toString());
 	}
 
 }

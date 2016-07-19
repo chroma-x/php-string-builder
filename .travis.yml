@@ -1,0 +1,28 @@
+language: php
+
+branches:
+  only:
+    - master
+
+php:
+  - '5.3'
+  - '5.4'
+  - '5.5'
+  - '7.0'
+  - hhvm
+
+matrix:
+  allow_failures:
+    - php: hhvm
+
+install:
+  - composer install
+
+before_script:
+  - mkdir -p build/logs
+
+script:
+  - phpunit --coverage-clover build/logs/clover.xml
+
+after_success:
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then CODECLIMATE_REPO_TOKEN=435940c3d26dc3d073ed32f9daa083e5fed45f1fd4c10b0d14b30d93b9b0fcea ./vendor/bin/test-reporter; fi;'

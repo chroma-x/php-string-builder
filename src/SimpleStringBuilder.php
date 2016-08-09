@@ -43,8 +43,8 @@ class SimpleStringBuilder
 			$type = is_object($position) ? get_class($position) : gettype($position);
 			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
 		}
-		if ($position > $this->length()) {
-			return null;
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
 		}
 		return mb_substr($this->string, $position, 1);
 	}
@@ -73,7 +73,7 @@ class SimpleStringBuilder
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
-		$this->string = $this->string . (string)$string;
+		$this->string = (string)$string . $this->string;
 		return $this;
 	}
 
@@ -92,8 +92,8 @@ class SimpleStringBuilder
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
-		if ($position > $this->length()) {
-			$position = $this->length();
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position);
 		return $this;
@@ -111,14 +111,14 @@ class SimpleStringBuilder
 			$type = is_object($position) ? get_class($position) : gettype($position);
 			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
 		}
-		if ($position > $this->length()) {
+		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
 		if (!is_int($length)) {
 			$type = is_object($length) ? get_class($length) : gettype($length);
 			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
 		}
-		if ($position + $length > $this->length()) {
+		if ($position + $length >= $this->length()) {
 			throw new \InvalidArgumentException('Length invalid.');
 		}
 		if (!is_scalar($string)) {
@@ -140,9 +140,15 @@ class SimpleStringBuilder
 			$type = is_object($position) ? get_class($position) : gettype($position);
 			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
 		}
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
+		}
 		if (!is_scalar($string)) {
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
+		}
+		if (mb_strlen((string)$string) !== 1) {
+			throw new \InvalidArgumentException('Expected a scalar value of length 1.');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position + 1);
 		return $this;
@@ -153,7 +159,12 @@ class SimpleStringBuilder
 	 */
 	public function reverse()
 	{
-		$this->string = strrev($this->string);
+		$length = $this->length();
+		$reversed = '';
+		while ($length-- > 0) {
+			$reversed .= mb_substr($this->string, $length, 1, mb_detect_encoding($this->string));
+		}
+		$this->string = $reversed;
 		return $this;
 	}
 
@@ -172,8 +183,8 @@ class SimpleStringBuilder
 			$type = is_object($length) ? get_class($length) : gettype($length);
 			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
 		}
-		if ($position > $this->length()) {
-			return $this;
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
 		}
 		if (is_null($length)) {
 			$this->string = mb_substr($this->string, 0, $position);
@@ -193,8 +204,8 @@ class SimpleStringBuilder
 			$type = is_object($position) ? get_class($position) : gettype($position);
 			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
 		}
-		if ($position > $this->length()) {
-			return $this;
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . mb_substr($this->string, $position + 1);
 		return $this;
@@ -224,11 +235,15 @@ class SimpleStringBuilder
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
+		if (mb_strlen((string)$string) === 0) {
+			throw new \InvalidArgumentException('Empty string is invalid.');
+		}
 		if (!is_int($offset)) {
 			$type = is_object($offset) ? get_class($offset) : gettype($offset);
 			throw new \InvalidArgumentException('Offset invalid. Expected integer. Got ' . $type . '.');
 		}
-		return strpos($this->string, (string)$string, $offset);
+		$index = mb_strpos($this->string, (string)$string, $offset);
+		return $index === false ? null : $index;
 	}
 
 	/**
@@ -246,7 +261,8 @@ class SimpleStringBuilder
 			$type = is_object($offset) ? get_class($offset) : gettype($offset);
 			throw new \InvalidArgumentException('Offset invalid. Expected integer. Got ' . $type . '.');
 		}
-		return strrpos($this->string, (string)$string, $offset);
+		$index = mb_strrpos($this->string, (string)$string, $offset);
+		return $index === false ? null : $index;
 	}
 
 	/**
@@ -262,7 +278,7 @@ class SimpleStringBuilder
 	 */
 	public function length()
 	{
-		return mb_strlen($this->string);
+		return mb_strlen($this->string, mb_detect_encoding($this->string));
 	}
 
 	/**

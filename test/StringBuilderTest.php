@@ -2,21 +2,21 @@
 
 namespace Test;
 
-use Markenwerk\SimpleStringBuilder\SimpleStringBuilder;
+use Markenwerk\StringBuilder\StringBuilder;
 
 /**
- * Class SimpleStringBuilderTest
+ * Class StringBuilderTest
  *
  * @package Test
  */
-class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
+class StringBuilderTest extends \PHPUnit_Framework_TestCase
 {
 
 	public function testBuilder()
 	{
-		$builder = new SimpleStringBuilder('Test');
+		$builder = new StringBuilder('Test');
 		$this->assertEquals(4, $builder->size());
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->append(12)
@@ -41,10 +41,10 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($builder->contains('21b'));
 		$this->assertFalse($builder->contains('abc'));
 		$this->assertEquals('öeb1212ewqb', $builder->reverse()->build());
-		$builder = new SimpleStringBuilder('0123456');
+		$builder = new StringBuilder('0123456');
 		$builder->delete(4);
 		$this->assertEquals('0123', $builder->build());
-		$builder = new SimpleStringBuilder('0123456');
+		$builder = new StringBuilder('0123456');
 		$builder
 			->delete(4, 1)
 			->deleteCharAt(1);
@@ -54,62 +54,62 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderConstructFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		new SimpleStringBuilder(array());
+		new StringBuilder(array());
 	}
 
 	public function testBuilderAppendFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->append(array());
 	}
 
 	public function testBuilderPrependFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->prepend(new \DateTimeZone('Europe/Berlin'));
 	}
 
 	public function testBuilderInsertFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->insert('a', 'a');
 	}
 
 	public function testBuilderInsertFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->insert(0, array());
 	}
 
 	public function testBuilderInsertFail3()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->insert(0, 'a');
 	}
 
 	public function testBuilderReplaceFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->replace('a', 1, 'a');
 	}
 
 	public function testBuilderReplaceFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->replace(0, 1, 'a');
 	}
 
 	public function testBuilderReplaceFail3()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->replace(0, 'a', 'a');
@@ -118,7 +118,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderReplaceFail4()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->replace(0, 2, 'a');
@@ -127,7 +127,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderReplaceFail5()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->replace(0, 1, new \DateTimeZone('Europe/Berlin'));
@@ -136,14 +136,14 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderSetCharAtFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->setCharAt('a', 'a');
 	}
 
 	public function testBuilderSetCharAtFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->setCharAt(0, array());
@@ -152,7 +152,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderSetCharAtFail3()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->setCharAt(1, 'a');
@@ -161,7 +161,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderSetCharAtFail4()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('a')
 			->setCharAt(0, 'ab');
@@ -170,70 +170,70 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderDeleteFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder('012345');
+		$builder = new StringBuilder('012345');
 		$builder->delete('a');
 	}
 
 	public function testBuilderDeleteFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder('012345');
+		$builder = new StringBuilder('012345');
 		$builder->delete(0, 'a');
 	}
 
 	public function testBuilderDeleteFail3()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder('012345');
+		$builder = new StringBuilder('012345');
 		$builder->delete(10);
 	}
 
 	public function testBuilderDeleteCharAtFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder('012345');
+		$builder = new StringBuilder('012345');
 		$builder->deleteCharAt('a');
 	}
 
 	public function testBuilderDeleteCharAtFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder('012345');
+		$builder = new StringBuilder('012345');
 		$builder->deleteCharAt(6);
 	}
 
 	public function testBuilderCharAtFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->charAt('a');
 	}
 
 	public function testBuilderCharAtFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->charAt(0);
 	}
 
 	public function testBuilderContainsFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->contains(array());
 	}
 
 	public function testBuilderBuildSubstringFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder->buildSubstring(1);
 	}
 
 	public function testBuilderBuildSubstringFail2()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('ab')
 			->buildSubstring(0, array());
@@ -242,7 +242,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	public function testBuilderBuildIndexOfFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
+		$builder = new StringBuilder();
 		$builder
 			->append('ab')
 			->indexOf('');

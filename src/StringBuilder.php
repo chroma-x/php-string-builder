@@ -1,15 +1,13 @@
 <?php
 
-namespace Markenwerk\SimpleStringBuilder;
+namespace Markenwerk\StringBuilder;
 
 /**
- * Class SimpleStringBuilder
+ * Class StringBuilder
  *
- * Simple string builder utility
- *
- * @package Markenwerk\SimpleStringBuilder
+ * @package Markenwerk\StringBuilder
  */
-class SimpleStringBuilder
+class StringBuilder
 {
 
 	/**

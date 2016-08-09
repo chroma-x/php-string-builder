@@ -1,7 +1,7 @@
 {
-  "name": "markenwerk/simple-string-builder",
+  "name": "markenwerk/string-builder",
   "type": "library",
-  "description": "A basic string builder library providing different string methods written in PHP.",
+  "description": "A string builder library providing different string methods written in PHP.",
   "keywords": [
     "String",
     "Builder"
@@ -17,7 +17,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Markenwerk\\SimpleStringBuilder\\": "src/"
+      "Markenwerk\\StringBuilder\\": "src/"
     }
   },
   "require": {

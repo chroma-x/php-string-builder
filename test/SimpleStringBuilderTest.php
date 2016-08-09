@@ -82,7 +82,7 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
-		$builder->contains(array());
+		$builder->stringContains(array());
 	}
 
 	public function testBuilderBuildSubstringFail1()

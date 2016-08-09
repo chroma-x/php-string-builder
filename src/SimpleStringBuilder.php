@@ -25,10 +25,7 @@ class SimpleStringBuilder
 	public function __construct($string = null)
 	{
 		if (!is_null($string)) {
-			if (!is_scalar($string)) {
-				$type = is_object($string) ? get_class($string) : gettype($string);
-				throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-			}
+			$this->validateScalar($string);
 			$this->string = (string)$string;
 		}
 	}
@@ -39,10 +36,7 @@ class SimpleStringBuilder
 	 */
 	public function charAt($position)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
+		$this->validateInteger($position);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
@@ -55,10 +49,7 @@ class SimpleStringBuilder
 	 */
 	public function append($string)
 	{
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-		}
+		$this->validateScalar($string);
 		$this->string .= (string)$string;
 		return $this;
 	}
@@ -69,10 +60,7 @@ class SimpleStringBuilder
 	 */
 	public function prepend($string)
 	{
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-		}
+		$this->validateScalar($string);
 		$this->string = (string)$string . $this->string;
 		return $this;
 	}
@@ -84,14 +72,9 @@ class SimpleStringBuilder
 	 */
 	public function insert($position, $string)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-		}
+		$this
+			->validateInteger($position)
+			->validateScalar($string);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
@@ -107,23 +90,15 @@ class SimpleStringBuilder
 	 */
 	public function replace($position, $length, $string)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
+		$this
+			->validateInteger($position)
+			->validateInteger($length)
+			->validateScalar($string);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
-		if (!is_int($length)) {
-			$type = is_object($length) ? get_class($length) : gettype($length);
-			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
-		}
 		if ($position + $length > $this->length()) {
 			throw new \InvalidArgumentException('Length invalid.');
-		}
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position + $length);
 		return $this;
@@ -136,16 +111,11 @@ class SimpleStringBuilder
 	 */
 	public function setCharAt($position, $string)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
+		$this
+			->validateInteger($position)
+			->validateScalar($string);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
-		}
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
 		if (mb_strlen((string)$string) !== 1) {
 			throw new \InvalidArgumentException('Expected a scalar value of length 1.');
@@ -175,14 +145,9 @@ class SimpleStringBuilder
 	 */
 	public function delete($position, $length = null)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
-		if (!is_int($length) && !is_null($length)) {
-			$type = is_object($length) ? get_class($length) : gettype($length);
-			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
-		}
+		$this
+			->validateInteger($position)
+			->validateIntegerOrNull($length);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
@@ -200,10 +165,7 @@ class SimpleStringBuilder
 	 */
 	public function deleteCharAt($position)
 	{
-		if (!is_int($position)) {
-			$type = is_object($position) ? get_class($position) : gettype($position);
-			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
-		}
+		$this->validateInteger($position);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid.');
 		}
@@ -217,10 +179,7 @@ class SimpleStringBuilder
 	 */
 	public function contains($string)
 	{
-		if (!is_scalar($string)) {
-			$type = is_object($string) ? get_class($string) : gettype($string);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-		}
+		$this->validateScalar($string);
 		return strpos($this->string, (string)$string) !== false;
 	}
 
@@ -277,12 +236,11 @@ class SimpleStringBuilder
 	 */
 	public function buildSubstring($startPosition, $length = null)
 	{
-		if ($startPosition > $this->length()) {
+		$this
+			->validateInteger($startPosition)
+			->validateIntegerOrNull($length);
+		if ($startPosition >= $this->length()) {
 			throw new \InvalidArgumentException('Start position ' . (string)$startPosition . ' invalid.');
-		}
-		if (!is_int($length) && !is_null($length)) {
-			$type = is_object($length) ? get_class($length) : gettype($length);
-			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
 		}
 		if (is_null($length)) {
 			return mb_substr($this->string, $startPosition);
@@ -323,6 +281,18 @@ class SimpleStringBuilder
 			throw new \InvalidArgumentException('Expected integer. Got ' . $type . '.');
 		}
 		return $this;
+	}
+
+	/**
+	 * @param mixed $value
+	 * @return $this
+	 */
+	private function validateIntegerOrNull($value)
+	{
+		if (is_null($value)) {
+			return $this;
+		}
+		return $this->validateInteger($value);
 	}
 
 	/**

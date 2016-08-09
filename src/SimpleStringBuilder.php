@@ -111,16 +111,19 @@ class SimpleStringBuilder
 			$type = is_object($position) ? get_class($position) : gettype($position);
 			throw new \InvalidArgumentException('Position invalid. Expected integer. Got ' . $type . '.');
 		}
+		if ($position > $this->length()) {
+			throw new \InvalidArgumentException('Position invalid.');
+		}
 		if (!is_int($length)) {
 			$type = is_object($length) ? get_class($length) : gettype($length);
 			throw new \InvalidArgumentException('Length invalid. Expected integer. Got ' . $type . '.');
 		}
+		if ($position + $length > $this->length()) {
+			throw new \InvalidArgumentException('Length invalid.');
+		}
 		if (!is_scalar($string)) {
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
-		}
-		if ($position > $this->length()) {
-			$position = $this->length();
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position + $length);
 		return $this;
@@ -269,7 +272,7 @@ class SimpleStringBuilder
 	 */
 	public function buildSubstring($startPosition, $length = null)
 	{
-		if ($this->length() > $startPosition) {
+		if ($startPosition > $this->length()) {
 			throw new \InvalidArgumentException('Start position ' . (string)$startPosition . ' invalid.');
 		}
 		if (!is_int($length) && !is_null($length)) {

@@ -20,18 +20,14 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 			->append(12)
 			->append(false)
 			->prepend('b')
-			->remove(1)
-			->replace(0, 'ab')
 			->append(true);
-		$this->assertEquals('ab121', $builder->build());
-		$this->assertEquals('121', $builder->buildSubstring(1));
-		$this->assertEquals('ab12', $builder->buildSubstring(0, 2));
-		$this->assertEquals(4, $builder->size());
+		$this->assertEquals('a12b1', $builder->build());
+		$this->assertEquals('12b1', $builder->buildSubstring(1));
+		$this->assertEquals('a1', $builder->buildSubstring(0, 2));
+		$this->assertEquals(5, $builder->size());
 		$this->assertEquals(5, $builder->length());
-		$this->assertTrue($builder->contains('ab'));
+		$this->assertTrue($builder->contains('12b'));
 		$this->assertFalse($builder->contains('abc'));
-		$this->assertTrue($builder->stringContains('ab1'));
-		$this->assertFalse($builder->stringContains('abc'));
 	}
 
 	public function testBuilderAppendFail()
@@ -45,14 +41,14 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
-		$builder->prepend(new \DateTime());
+		$builder->prepend(new \DateTimeZone('Europe/Berlin'));
 	}
 
 	public function testBuilderReplaceFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
-		$builder->replace(0, 'a');
+		$builder->replace(0, 1, 'a');
 	}
 
 	public function testBuilderReplaceFail2()
@@ -61,14 +57,16 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 		$builder = new SimpleStringBuilder();
 		$builder
 			->append('a')
-			->replace(0, new \DateTime());
+			->replace(0, 2, 'a');
 	}
 
-	public function testBuilderRemoveFail()
+	public function testBuilderReplaceFail3()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
-		$builder->remove(0);
+		$builder
+			->append('a')
+			->replace(0, 1, new \DateTimeZone('Europe/Berlin'));
 	}
 
 	public function testBuilderContainsFail()
@@ -76,13 +74,6 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
 		$builder->contains(array());
-	}
-
-	public function testBuilderStringContainsFail()
-	{
-		$this->setExpectedException(get_class(new \InvalidArgumentException()));
-		$builder = new SimpleStringBuilder();
-		$builder->stringContains(array());
 	}
 
 	public function testBuilderBuildSubstringFail1()

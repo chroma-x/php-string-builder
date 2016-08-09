@@ -239,4 +239,13 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 			->buildSubstring(0, array());
 	}
 
+	public function testBuilderBuildIndexOfFail()
+	{
+		$this->setExpectedException(get_class(new \InvalidArgumentException()));
+		$builder = new SimpleStringBuilder();
+		$builder
+			->append('ab')
+			->indexOf('');
+	}
+
 }

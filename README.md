@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/markenwerk/php-string-builder.svg?branch=master)](https://travis-ci.org/markenwerk/php-string-builder)
 [![Test Coverage](https://codeclimate.com/github/markenwerk/php-string-builder/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-string-builder/coverage)
-[![Dependency Status](https://www.versioneye.com/user/projects/578e8a2d88bf880039f7e56f/badge.svg)](https://www.versioneye.com/user/projects/578e8a2d88bf880039f7e56f)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/925a6e2e-e131-4426-826e-2ed9a7f9213d.svg)](https://insight.sensiolabs.com/projects/925a6e2e-e131-4426-826e-2ed9a7f9213d)
+[![Dependency Status](https://www.versioneye.com/user/projects/57aa33adf27cc20050102f0e/badge.svg)](https://www.versioneye.com/user/projects/57aa33adf27cc20050102f0e)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/ec36917d-baa1-482c-8916-41e2a2c48d5c.svg)](https://insight.sensiolabs.com/projects/ec36917d-baa1-482c-8916-41e2a2c48d5c)
 [![Code Climate](https://codeclimate.com/github/markenwerk/php-string-builder/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-string-builder)
 [![Latest Stable Version](https://poser.pugx.org/markenwerk/string-builder/v/stable)](https://packagist.org/packages/markenwerk/string-builder)
 [![Total Downloads](https://poser.pugx.org/markenwerk/string-builder/downloads)](https://packagist.org/packages/markenwerk/string-builder)

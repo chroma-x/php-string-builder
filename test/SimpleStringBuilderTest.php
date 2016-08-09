@@ -51,6 +51,12 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals('02356', $builder->build());
 	}
 
+	public function testBuilderConstructFail()
+	{
+		$this->setExpectedException(get_class(new \InvalidArgumentException()));
+		new SimpleStringBuilder(array());
+	}
+
 	public function testBuilderAppendFail()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
@@ -156,7 +162,9 @@ class SimpleStringBuilderTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));
 		$builder = new SimpleStringBuilder();
-		$builder->setCharAt(0, 'ab');
+		$builder
+			->append('a')
+			->setCharAt(0, 'ab');
 	}
 
 	public function testBuilderDeleteFail1()

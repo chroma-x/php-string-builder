@@ -257,6 +257,9 @@ class SimpleStringBuilder
 			$type = is_object($string) ? get_class($string) : gettype($string);
 			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
 		}
+		if (mb_strlen((string)$string) === 0) {
+			throw new \InvalidArgumentException('Empty string is invalid.');
+		}
 		if (!is_int($offset)) {
 			$type = is_object($offset) ? get_class($offset) : gettype($offset);
 			throw new \InvalidArgumentException('Offset invalid. Expected integer. Got ' . $type . '.');

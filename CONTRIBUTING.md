@@ -1,4 +1,4 @@
-# Contributing to PHP Simple String Builder
+# Contributing to PHP String Builder
 
 ## About
 
@@ -81,21 +81,21 @@ We’ve found that test-first development really helps make features better arch
 
 ## Full example
 
-Here’s an example workflow for `php-simple-string-builder` hosted on Github, which is currently in version 1.0.2. Your username is `yourname` and you’re submitting a basic bugfix. 
+Here’s an example workflow for `php-string-builder` hosted on Github, which is currently in version 1.0.2. Your username is `yourname` and you’re submitting a basic bugfix. 
 
 ### Preparing your Fork
 
-- Hit ‘fork’ on Github, creating e.g. `yourname/php-simple-string-builder`
+- Hit ‘fork’ on Github, creating e.g. `yourname/php-string-builder`
 - Clone your project  
 
 ```
-git clone git@github.com:yourname/php-simple-string-builder
+git clone git@github.com:yourname/php-string-builder
 ```
 
 - Create a branch
 
 ```
-cd php-simple-string-builder
+cd php-string-builder
 git checkout -b fix-issue-269 1.0.0
 ```
 
@@ -121,4 +121,3 @@ git push origin HEAD
 - Visit Github, click handy “Pull request” button that it will make upon noticing your new branch.
 - In the description field, write down issue number (if submitting code fixing an existing issue) or describe the issue + your fix (if submitting a wholly new bugfix).
 - Hit ‘submit’! And please be patient - the maintainers will get to you when they can.
-

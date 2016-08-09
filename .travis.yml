@@ -25,4 +25,4 @@ script:
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_success:
-  - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then CODECLIMATE_REPO_TOKEN=435940c3d26dc3d073ed32f9daa083e5fed45f1fd4c10b0d14b30d93b9b0fcea ./vendor/bin/test-reporter; fi;'
+  - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then CODECLIMATE_REPO_TOKEN=3496c3863e75bb8133ff86315341099827436e5aa313e1424559ec5b81fdf2ba ./vendor/bin/test-reporter; fi;'

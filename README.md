@@ -31,8 +31,6 @@ require_once('path/to/vendor/autoload.php');
 
 ### Building a string
 
-In this first implementation the only provided method is appending strings to the builder.
-
 ```{php}
 use Markenwerk\SimpleStringBuilder\SimpleStringBuilder;
 
@@ -41,16 +39,35 @@ $builder
 	->append('a')
 	->append(12)
 	->append(false)
+	->prepend('b')
+	->remove(1)
+	->replace(0, 'ab')
 	->append(true);
 
-$string = $builder->toString();
+$string = $builder->build();
 fwrite(STDOUT, 'Result "' . $string . '"' . PHP_EOL);
+
+$substring = $builder->buildSubstring(0, 2);
+fwrite(STDOUT, 'Substring result from position 0 and size 2 "' . $substring . '"' . PHP_EOL);
+
+$substring = $builder->buildSubstring(1);
+fwrite(STDOUT, 'Substring result from position 1 till the end "' . $substring . '"' . PHP_EOL);
+
+$size = $builder->size();
+fwrite(STDOUT, 'Builder holds "' . $size . '" partial strings' . PHP_EOL);
+
+$length = $builder->length();
+fwrite(STDOUT, 'Resulting string length is "' . $length . '" characters' . PHP_EOL);
 ```
 
 will output the following
 
 ```{http}
-Result "a121"
+Result "ab121"
+Substring result from position 0 and size 2 "ab12"
+Substring result from position 1 till the end "121"
+Builder holds "4" partial strings
+Resulting string length is "5" characters
 ```
 
 ---

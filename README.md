@@ -16,7 +16,7 @@ A basic string builder library providing different string methods written in PHP
 ```{json}
 {
    	"require": {
-        "markenwerk/simple-string-builder": "~1.0"
+        "markenwerk/simple-string-builder": "~2.0"
     }
 }
 ```

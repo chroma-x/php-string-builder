@@ -16,7 +16,9 @@ class StringBuilder
 	private $string;
 
 	/**
-	 * SimpleStringBuilder constructor.
+	 * SimpleStringBuilder constructor
+	 *
+	 * Takes an initial string as argument
 	 *
 	 * @param null $string
 	 */
@@ -29,19 +31,8 @@ class StringBuilder
 	}
 
 	/**
-	 * @param int $position
-	 * @return string
-	 */
-	public function charAt($position)
-	{
-		$this->validateInteger($position);
-		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
-		}
-		return mb_substr($this->string, $position, 1);
-	}
-
-	/**
+	 * Appends the given string
+	 *
 	 * @param string $string
 	 * @return $this
 	 */
@@ -53,6 +44,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Prepends the given string
+	 *
 	 * @param string $string
 	 * @return $this
 	 */
@@ -64,6 +57,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Inserts the given string at the given position
+	 *
 	 * @param int $position
 	 * @param string $string
 	 * @return $this
@@ -74,13 +69,15 @@ class StringBuilder
 			->validateInteger($position)
 			->validateScalar($string);
 		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
+			throw new \InvalidArgumentException('Position invalid');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position);
 		return $this;
 	}
 
 	/**
+	 * Replaces the characters defined by the given position and length with the given string
+	 *
 	 * @param int $position
 	 * @param int $length
 	 * @param string $string
@@ -93,36 +90,40 @@ class StringBuilder
 			->validateInteger($length)
 			->validateScalar($string);
 		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
+			throw new \InvalidArgumentException('Position invalid');
 		}
 		if ($position + $length > $this->length()) {
-			throw new \InvalidArgumentException('Length invalid.');
+			throw new \InvalidArgumentException('Length invalid');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position + $length);
 		return $this;
 	}
 
 	/**
+	 * Sets the character at the given position
+	 *
 	 * @param int $position
-	 * @param string $string
+	 * @param string $character
 	 * @return $this
 	 */
-	public function setCharAt($position, $string)
+	public function setCharAt($position, $character)
 	{
 		$this
 			->validateInteger($position)
-			->validateScalar($string);
+			->validateScalar($character);
 		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
+			throw new \InvalidArgumentException('Position invalid');
 		}
-		if (mb_strlen((string)$string) !== 1) {
-			throw new \InvalidArgumentException('Expected a scalar value of length 1.');
+		if (mb_strlen((string)$character) !== 1) {
+			throw new \InvalidArgumentException('Expected a scalar value of length 1');
 		}
-		$this->string = mb_substr($this->string, 0, $position) . (string)$string . mb_substr($this->string, $position + 1);
+		$this->string = mb_substr($this->string, 0, $position) . (string)$character . mb_substr($this->string, $position + 1);
 		return $this;
 	}
 
 	/**
+	 * Reverts the string to build
+	 *
 	 * @return $this
 	 */
 	public function reverse()
@@ -137,6 +138,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Removes the portion defined by the given position and length
+	 *
 	 * @param int $position
 	 * @param int $length
 	 * @return $this
@@ -147,7 +150,7 @@ class StringBuilder
 			->validateInteger($position)
 			->validateIntegerOrNull($length);
 		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
+			throw new \InvalidArgumentException('Position invalid');
 		}
 		if (is_null($length)) {
 			$this->string = mb_substr($this->string, 0, $position);
@@ -158,6 +161,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Removes the character at the given position
+	 *
 	 * @param int $position
 	 * @return $this
 	 */
@@ -165,23 +170,29 @@ class StringBuilder
 	{
 		$this->validateInteger($position);
 		if ($position >= $this->length()) {
-			throw new \InvalidArgumentException('Position invalid.');
+			throw new \InvalidArgumentException('Position invalid');
 		}
 		$this->string = mb_substr($this->string, 0, $position) . mb_substr($this->string, $position + 1);
 		return $this;
 	}
 
 	/**
-	 * @param string $string
+	 * Whether the string to build contains the given substring
+	 *
+	 * @param string $substring
 	 * @return bool
 	 */
-	public function contains($string)
+	public function contains($substring)
 	{
-		$this->validateScalar($string);
-		return strpos($this->string, (string)$string) !== false;
+		$this->validateScalar($substring);
+		return strpos($this->string, (string)$substring) !== false;
 	}
 
 	/**
+	 * Returns the index of the first occurence of the given substring or null
+	 *
+	 * Takes an optional parameter to begin searching after the given offset
+	 *
 	 * @param string $string
 	 * @param int $offset
 	 * @return int
@@ -197,6 +208,10 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns the index of the last occurence of the given substring or null
+	 *
+	 * Takes an optional parameter to end searching before the given offset
+	 *
 	 * @param string $string
 	 * @param int $offset
 	 * @return int
@@ -212,6 +227,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns the number of bytes of the string to build
+	 *
 	 * @return int
 	 */
 	public function size()
@@ -220,6 +237,8 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns the number of characters of the string to build
+	 *
 	 * @return int
 	 */
 	public function length()
@@ -228,6 +247,23 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns the character at the given position
+	 *
+	 * @param int $position
+	 * @return string
+	 */
+	public function charAt($position)
+	{
+		$this->validateInteger($position);
+		if ($position >= $this->length()) {
+			throw new \InvalidArgumentException('Position invalid');
+		}
+		return mb_substr($this->string, $position, 1);
+	}
+
+	/**
+	 * Returns an substring defined by startPosition and length
+	 *
 	 * @param int $startPosition
 	 * @param int $length
 	 * @return string
@@ -238,7 +274,7 @@ class StringBuilder
 			->validateInteger($startPosition)
 			->validateIntegerOrNull($length);
 		if ($startPosition >= $this->length()) {
-			throw new \InvalidArgumentException('Start position ' . (string)$startPosition . ' invalid.');
+			throw new \InvalidArgumentException('Start position ' . (string)$startPosition . ' invalid');
 		}
 		if (is_null($length)) {
 			return mb_substr($this->string, $startPosition);
@@ -248,11 +284,23 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns the whole resulting string
+	 *
 	 * @return string
 	 */
 	public function build()
 	{
 		return $this->string;
+	}
+
+	/**
+	 * Returns the whole resulting string
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->build();
 	}
 
 	/**
@@ -263,7 +311,7 @@ class StringBuilder
 	{
 		if (!is_scalar($value)) {
 			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected a scalar value. Got ' . $type . '.');
+			throw new \InvalidArgumentException('Expected a scalar value; got ' . $type);
 		}
 		return $this;
 	}
@@ -276,7 +324,7 @@ class StringBuilder
 	{
 		if (!is_int($value)) {
 			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected integer. Got ' . $type . '.');
+			throw new \InvalidArgumentException('Expected integer; got ' . $type);
 		}
 		return $this;
 	}
@@ -301,7 +349,7 @@ class StringBuilder
 	{
 		$value = (string)$value;
 		if (empty($value)) {
-			throw new \InvalidArgumentException('Empty string is invalid.');
+			throw new \InvalidArgumentException('Empty string is invalid');
 		}
 		return $this;
 	}

@@ -108,6 +108,38 @@ will output the following
 12. Whether the string contains "ipsum"                   1
 ```
 
+### Exception handling
+
+All methods throw an `\InvalidArgumentException` if misconfigured except `indexOf` and `lastIndexOf` wich returns `null` if the given subtring is not contained by the string to build.
+
+```{php}
+use Markenwerk\StringBuilder\StringBuilder;
+
+try {
+	$builder = new StringBuilder();
+
+	$result = $builder->indexOf('a');
+	fwrite(STDOUT, '1. Result                 ' . $result . PHP_EOL);
+
+	$result = $builder->lastIndexOf('a');
+	fwrite(STDOUT, '2. Result                 ' . $result . PHP_EOL);
+
+	$result = $builder->charAt(10);
+	fwrite(STDOUT, '3. Result                 ' . $result . PHP_EOL);
+
+} catch (\InvalidArgumentException $exception) {
+	fwrite(STDERR, 'Exception with message    ' . $exception->getMessage() . PHP_EOL);
+}
+```
+
+will output the following
+
+```{txt}
+1. Result                 <NULL>
+2. Result                 <NULL>
+Exception with message    Position invalid
+```
+
 ---
 
 ## Contribution

@@ -207,7 +207,7 @@ class StringBuilder
 			->validateScalar($string)
 			->validateEmpty($string)
 			->validateInteger($offset);
-		$index = mb_strrpos($this->string, (string)$string, $offset);
+		$index = mb_strrpos($this->string, (string)$string, -1 * $offset);
 		return $index === false ? null : $index;
 	}
 

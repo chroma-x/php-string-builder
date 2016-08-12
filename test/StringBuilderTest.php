@@ -92,6 +92,13 @@ class StringBuilderTest extends \PHPUnit_Framework_TestCase
 		$builder->insert(0, 'a');
 	}
 
+	public function testBuilderInsertFail4()
+	{
+		$this->setExpectedException(get_class(new \InvalidArgumentException()));
+		$builder = new StringBuilder();
+		$builder->insert(-1, 'a');
+	}
+
 	public function testBuilderReplaceFail1()
 	{
 		$this->setExpectedException(get_class(new \InvalidArgumentException()));

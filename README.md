@@ -81,19 +81,19 @@ $result = $builder->size();
 fwrite(STDOUT, ' 6. Number of bytes                                       ' . $result . PHP_EOL);
 
 $result = $builder->indexOf('e');
-fwrite(STDOUT, ' 7. First occurence of \'e\'                                ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 7. First occurence of "e"                                ' . $result . PHP_EOL);
 
 $result = $builder->indexOf('e', 5);
-fwrite(STDOUT, ' 8. First occurence of \'e\' after position 5               ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 8. First occurence of "e" after position 5               ' . $result . PHP_EOL);
 
 $result = $builder->lastIndexOf('e');
-fwrite(STDOUT, ' 9. Last occurence of \'e\'                                 ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 9. Last occurence of "e"                                 ' . $result . PHP_EOL);
 
 $result = $builder->lastIndexOf('e', 5);
-fwrite(STDOUT, '10. Last occurence of \'e\' before the 5th last character   ' . $result . PHP_EOL);
+fwrite(STDOUT, '10. Last occurence of "e" before the 5th last character   ' . $result . PHP_EOL);
 
 $result = $builder->contains('ipsum');
-fwrite(STDOUT, '12. Whether the string contains \'ipsum\'                   ' . $result . PHP_EOL);
+fwrite(STDOUT, '12. Whether the string contains "ipsum"                   ' . $result . PHP_EOL);
 ```
 
 will output the following
@@ -101,11 +101,11 @@ will output the following
 ```{txt}
  5. String length                                         38
  6. Number of bytes                                       39
- 7. First occurence of 'e'                                4
- 8. First occurence of 'e' after position 5               8
- 9. Last occurence of 'e'                                 37
-10. Last occurence of 'e' before the 5th last character   29
-12. Whether the string contains 'ipsum'                   1
+ 7. First occurence of "e"                                4
+ 8. First occurence of "e" after position 5               8
+ 9. Last occurence of "e"                                 37
+10. Last occurence of "e" before the 5th last character   29
+12. Whether the string contains "ipsum"                   1
 ```
 
 ---

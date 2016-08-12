@@ -105,7 +105,7 @@ will output the following
  8. First occurence of "e" after position 5               8
  9. Last occurence of "e"                                 37
 10. Last occurence of "e" before the 5th last character   29
-12. Whether the string contains "ipsum"                   1
+12. Whether the string contains "ipsum"                   <TRUE>
 ```
 
 ### Exception handling

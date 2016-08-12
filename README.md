@@ -110,7 +110,7 @@ will output the following
 
 ### Exception handling
 
-All methods throw an `\InvalidArgumentException` if misconfigured except `indexOf` and `lastIndexOf` wich returns `null` if the given subtring is not contained by the string to build.
+All methods throw an `\InvalidArgumentException` if misconfigured except `indexOf` and `lastIndexOf` wich return `null` if the given subtring is not contained by the string to build.
 
 ```{php}
 use Markenwerk\StringBuilder\StringBuilder;

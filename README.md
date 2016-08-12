@@ -64,7 +64,7 @@ fwrite(STDOUT, ' 4. Character                                             ' . $r
 
 will output the following
 
-```{http}
+```{txt}
  1. Built string                                          ä2wertzem ipsum dolor sit amet, conset
  2. Built substring                                       rt
  3. Built substring                                       rtzem ipsum dolor sit amet, conset
@@ -98,7 +98,7 @@ fwrite(STDOUT, '12. Whether the string contains \'ipsum\'                   ' . 
 
 will output the following
 
-```{http}
+```{txt}
  5. String length                                         38
  6. Number of bytes                                       39
  7. First occurence of 'e'                                4

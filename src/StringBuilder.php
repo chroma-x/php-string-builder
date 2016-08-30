@@ -268,7 +268,7 @@ class StringBuilder
 	 */
 	public function firstChar()
 	{
-		return mb_substr($this->string, 0, 1);
+		return mb_substr($this->string, 0, 1, mb_detect_encoding($this->string));
 	}
 
 	/**
@@ -278,7 +278,7 @@ class StringBuilder
 	 */
 	public function lastChar()
 	{
-		return mb_substr($this->string, -1);
+		return mb_substr($this->string, -1, null, mb_detect_encoding($this->string));
 	}
 
 	/**

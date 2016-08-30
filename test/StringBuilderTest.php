@@ -39,6 +39,8 @@ class StringBuilderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(9, $builder->lastIndexOf('e'));
 		$this->assertNull($builder->lastIndexOf('e',10));
 		$this->assertTrue($builder->contains('21b'));
+		$this->assertEquals('b', $builder->firstChar());
+		$this->assertEquals('ö', $builder->lastChar());
 		$this->assertFalse($builder->contains('abc'));
 		$this->assertEquals('öeb1212ewqb', $builder->reverse()->build());
 		$builder = new StringBuilder('0123456');

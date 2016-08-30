@@ -262,6 +262,26 @@ class StringBuilder
 	}
 
 	/**
+	 * Returns first character
+	 *
+	 * @return string
+	 */
+	public function firstChar()
+	{
+		return mb_substr($this->string, 0, 1);
+	}
+
+	/**
+	 * Returns last character
+	 *
+	 * @return string
+	 */
+	public function lastChar()
+	{
+		return mb_substr($this->string, -1);
+	}
+
+	/**
 	 * Returns an substring defined by startPosition and length
 	 *
 	 * @param int $startPosition

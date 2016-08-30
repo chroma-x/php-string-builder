@@ -59,7 +59,13 @@ $result = $builder->buildSubstring(5);
 fwrite(STDOUT, ' 3. Built substring                                       ' . $result . PHP_EOL);
 
 $result = $builder->charAt(5);
-fwrite(STDOUT, ' 4. Character                                             ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 4. Character at position 5                               ' . $result . PHP_EOL);
+
+$result = $builder->firstChar();
+fwrite(STDOUT, ' 5. First character                                       ' . $result . PHP_EOL);
+
+$result = $builder->lastChar();
+fwrite(STDOUT, ' 6. Last character                                        ' . $result . PHP_EOL);
 ```
 
 will output the following
@@ -68,44 +74,46 @@ will output the following
  1. Built string                                          ä2wertzem ipsum dolor sit amet, conset
  2. Built substring                                       rt
  3. Built substring                                       rtzem ipsum dolor sit amet, conset
- 4. Character                                             r
+ 4. Character at position 5                               r
+ 5. First character                                       ä
+ 6. Last character                                        t
 ```
 
 ### Getting string properties
 
 ```{php}
 $result = $builder->length();
-fwrite(STDOUT, ' 5. String length                                         ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 7. String length                                         ' . $result . PHP_EOL);
 
 $result = $builder->size();
-fwrite(STDOUT, ' 6. Number of bytes                                       ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 8. Number of bytes                                       ' . $result . PHP_EOL);
 
 $result = $builder->indexOf('e');
-fwrite(STDOUT, ' 7. First occurence of "e"                                ' . $result . PHP_EOL);
+fwrite(STDOUT, ' 9. First occurence of "e"                                ' . $result . PHP_EOL);
 
 $result = $builder->indexOf('e', 5);
-fwrite(STDOUT, ' 8. First occurence of "e" after position 5               ' . $result . PHP_EOL);
+fwrite(STDOUT, '10. First occurence of "e" after position 5               ' . $result . PHP_EOL);
 
 $result = $builder->lastIndexOf('e');
-fwrite(STDOUT, ' 9. Last occurence of "e"                                 ' . $result . PHP_EOL);
+fwrite(STDOUT, '11. Last occurence of "e"                                 ' . $result . PHP_EOL);
 
 $result = $builder->lastIndexOf('e', 5);
-fwrite(STDOUT, '10. Last occurence of "e" before the 5th last character   ' . $result . PHP_EOL);
+fwrite(STDOUT, '12. Last occurence of "e" before the 5th last character   ' . $result . PHP_EOL);
 
 $result = $builder->contains('ipsum');
-fwrite(STDOUT, '12. Whether the string contains "ipsum"                   ' . $result . PHP_EOL);
+fwrite(STDOUT, '13. Whether the string contains "ipsum"                   ' . $result . PHP_EOL);
 ```
 
 will output the following
 
 ```{txt}
- 5. String length                                         38
- 6. Number of bytes                                       39
- 7. First occurence of "e"                                4
- 8. First occurence of "e" after position 5               8
- 9. Last occurence of "e"                                 37
-10. Last occurence of "e" before the 5th last character   29
-12. Whether the string contains "ipsum"                   <TRUE>
+ 7. String length                                         38
+ 8. Number of bytes                                       39
+ 9. First occurence of "e"                                4
+10. First occurence of "e" after position 5               8
+11. Last occurence of "e"                                 37
+12. Last occurence of "e" before the 5th last character   29
+13. Whether the string contains "ipsum"                   <TRUE>
 ```
 
 ### Exception handling

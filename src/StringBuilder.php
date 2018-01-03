@@ -2,6 +2,8 @@
 
 namespace Markenwerk\StringBuilder;
 
+use Markenwerk\StringBuilder\Util\ArgumentValidator;
+
 /**
  * Class StringBuilder
  *
@@ -21,11 +23,12 @@ class StringBuilder
 	 * Takes an initial string as argument
 	 *
 	 * @param null $string
+	 * @throws \InvalidArgumentException
 	 */
 	public function __construct($string = null)
 	{
-		if (!is_null($string)) {
-			$this->validateScalar($string);
+		if ($string !== null) {
+			ArgumentValidator::validateScalar($string);
 			$this->string = (string)$string;
 		}
 	}
@@ -35,10 +38,11 @@ class StringBuilder
 	 *
 	 * @param string $string
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function append($string)
 	{
-		$this->validateScalar($string);
+		ArgumentValidator::validateScalar($string);
 		$this->string .= (string)$string;
 		return $this;
 	}
@@ -48,10 +52,11 @@ class StringBuilder
 	 *
 	 * @param string $string
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function prepend($string)
 	{
-		$this->validateScalar($string);
+		ArgumentValidator::validateScalar($string);
 		$this->string = (string)$string . $this->string;
 		return $this;
 	}
@@ -62,12 +67,12 @@ class StringBuilder
 	 * @param int $position
 	 * @param string $string
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function insert($position, $string)
 	{
-		$this
-			->validateUnsignedInteger($position)
-			->validateScalar($string);
+		ArgumentValidator::validateUnsignedInteger($position);
+		ArgumentValidator::validateScalar($string);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
@@ -82,13 +87,13 @@ class StringBuilder
 	 * @param int $length
 	 * @param string $string
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function replace($position, $length, $string)
 	{
-		$this
-			->validateUnsignedInteger($position)
-			->validateUnsignedInteger($length)
-			->validateScalar($string);
+		ArgumentValidator::validateUnsignedInteger($position);
+		ArgumentValidator::validateUnsignedInteger($length);
+		ArgumentValidator::validateScalar($string);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
@@ -105,12 +110,12 @@ class StringBuilder
 	 * @param int $position
 	 * @param string $character
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function setCharAt($position, $character)
 	{
-		$this
-			->validateUnsignedInteger($position)
-			->validateScalar($character);
+		ArgumentValidator::validateUnsignedInteger($position);
+		ArgumentValidator::validateScalar($character);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
@@ -143,16 +148,16 @@ class StringBuilder
 	 * @param int $position
 	 * @param int $length
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function delete($position, $length = null)
 	{
-		$this
-			->validateUnsignedInteger($position)
-			->validateUnsignedIntegerOrNull($length);
+		ArgumentValidator::validateUnsignedInteger($position);
+		ArgumentValidator::validateUnsignedIntegerOrNull($length);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
-		if (is_null($length)) {
+		if ($length === null) {
 			$this->string = mb_substr($this->string, 0, $position);
 		} else {
 			$this->string = mb_substr($this->string, 0, $position) . mb_substr($this->string, $position + $length);
@@ -165,10 +170,11 @@ class StringBuilder
 	 *
 	 * @param int $position
 	 * @return $this
+	 * @throws \InvalidArgumentException
 	 */
 	public function deleteCharAt($position)
 	{
-		$this->validateUnsignedInteger($position);
+		ArgumentValidator::validateUnsignedInteger($position);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
@@ -181,10 +187,11 @@ class StringBuilder
 	 *
 	 * @param string $substring
 	 * @return bool
+	 * @throws \InvalidArgumentException
 	 */
 	public function contains($substring)
 	{
-		$this->validateScalar($substring);
+		ArgumentValidator::validateScalar($substring);
 		return strpos($this->string, (string)$substring) !== false;
 	}
 
@@ -196,13 +203,13 @@ class StringBuilder
 	 * @param string $string
 	 * @param int $offset
 	 * @return int
+	 * @throws \InvalidArgumentException
 	 */
 	public function indexOf($string, $offset = 0)
 	{
-		$this
-			->validateScalar($string)
-			->validateEmpty($string)
-			->validateUnsignedInteger($offset);
+		ArgumentValidator::validateScalar($string);
+		ArgumentValidator::validateEmpty($string);
+		ArgumentValidator::validateUnsignedInteger($offset);
 		$index = mb_strpos($this->string, (string)$string, $offset);
 		return $index === false ? null : $index;
 	}
@@ -215,13 +222,13 @@ class StringBuilder
 	 * @param string $string
 	 * @param int $offset
 	 * @return int
+	 * @throws \InvalidArgumentException
 	 */
 	public function lastIndexOf($string, $offset = 0)
 	{
-		$this
-			->validateScalar($string)
-			->validateEmpty($string)
-			->validateUnsignedInteger($offset);
+		ArgumentValidator::validateScalar($string);
+		ArgumentValidator::validateEmpty($string);
+		ArgumentValidator::validateUnsignedInteger($offset);
 		$index = mb_strrpos($this->string, (string)$string, -1 * $offset);
 		return $index === false ? null : $index;
 	}
@@ -251,10 +258,11 @@ class StringBuilder
 	 *
 	 * @param int $position
 	 * @return string
+	 * @throws \InvalidArgumentException
 	 */
 	public function charAt($position)
 	{
-		$this->validateUnsignedInteger($position);
+		ArgumentValidator::validateUnsignedInteger($position);
 		if ($position >= $this->length()) {
 			throw new \InvalidArgumentException('Position invalid');
 		}
@@ -287,20 +295,19 @@ class StringBuilder
 	 * @param int $startPosition
 	 * @param int $length
 	 * @return string
+	 * @throws \InvalidArgumentException
 	 */
 	public function buildSubstring($startPosition, $length = null)
 	{
-		$this
-			->validateUnsignedInteger($startPosition)
-			->validateUnsignedIntegerOrNull($length);
+		ArgumentValidator::validateUnsignedInteger($startPosition);
+		ArgumentValidator::validateUnsignedIntegerOrNull($length);
 		if ($startPosition >= $this->length()) {
 			throw new \InvalidArgumentException('Start position ' . (string)$startPosition . ' invalid');
 		}
-		if (is_null($length)) {
+		if ($length === null) {
 			return mb_substr($this->string, $startPosition);
-		} else {
-			return mb_substr($this->string, $startPosition, $length);
 		}
+		return mb_substr($this->string, $startPosition, $length);
 	}
 
 	/**
@@ -321,60 +328,6 @@ class StringBuilder
 	public function __toString()
 	{
 		return $this->build();
-	}
-
-	/**
-	 * @param mixed $value
-	 * @return $this
-	 */
-	private function validateScalar($value)
-	{
-		if (!is_scalar($value)) {
-			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected a scalar value; got ' . $type);
-		}
-		return $this;
-	}
-
-	/**
-	 * @param mixed $value
-	 * @return $this
-	 */
-	private function validateUnsignedInteger($value)
-	{
-		if (!is_int($value)) {
-			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected an unsigned integer; got ' . $type);
-		}
-		if ($value < 0) {
-			throw new \InvalidArgumentException('Expected an unsigned integer; got ' . $value);
-		}
-		return $this;
-	}
-
-	/**
-	 * @param mixed $value
-	 * @return $this
-	 */
-	private function validateUnsignedIntegerOrNull($value)
-	{
-		if (is_null($value)) {
-			return $this;
-		}
-		return $this->validateUnsignedInteger($value);
-	}
-
-	/**
-	 * @param mixed $value
-	 * @return $this
-	 */
-	private function validateEmpty($value)
-	{
-		$value = (string)$value;
-		if (empty($value)) {
-			throw new \InvalidArgumentException('Empty string is invalid');
-		}
-		return $this;
 	}
 
 }

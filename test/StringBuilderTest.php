@@ -37,7 +37,7 @@ class StringBuilderTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(9, $builder->indexOf('e', 4));
 		$this->assertNull($builder->indexOf('e', 10));
 		$this->assertEquals(9, $builder->lastIndexOf('e'));
-		$this->assertNull($builder->lastIndexOf('e',10));
+		$this->assertNull($builder->lastIndexOf('e', 10));
 		$this->assertTrue($builder->contains('21b'));
 		$this->assertEquals('b', $builder->firstChar());
 		$this->assertEquals('ö', $builder->lastChar());
@@ -51,6 +51,12 @@ class StringBuilderTest extends \PHPUnit_Framework_TestCase
 			->delete(4, 1)
 			->deleteCharAt(1);
 		$this->assertEquals('02356', $builder->build());
+	}
+
+	public function testBuilderNull()
+	{
+		$builder = new StringBuilder();
+		$this->assertNull($builder->build());
 	}
 
 	public function testBuilderConstructFail()

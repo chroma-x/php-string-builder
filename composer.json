@@ -1,23 +1,23 @@
 {
-  "name": "markenwerk/string-builder",
+  "name": "chroma-x/string-builder",
   "type": "library",
   "description": "A string builder library providing different string methods written in PHP.",
   "keywords": [
     "String",
     "Builder"
   ],
-  "homepage": "http://markenwerk.net/",
+  "homepage": "http://chroma-x.de/",
   "license": "MIT",
   "authors": [
     {
       "name": "Martin Brecht-Precht",
-      "email": "mb@markenwerk.net",
-      "homepage": "http://markenwerk.net"
+      "email": "mb@chroma-x.de",
+      "homepage": "http://chroma-x.de"
     }
   ],
   "autoload": {
     "psr-4": {
-      "Markenwerk\\StringBuilder\\": "src/"
+      "ChromaX\\StringBuilder\\": "src/"
     }
   },
   "require": {

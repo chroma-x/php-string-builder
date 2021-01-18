@@ -1,44 +1,47 @@
 <?php
 
-namespace Markenwerk\StringBuilder\Util;
+namespace ChromaX\StringBuilder\Util;
+
+use InvalidArgumentException;
 
 /**
  * Class ArgumentValidator
  *
- * @package Markenwerk\StringBuilder\Util
+ * @package ChromaX\StringBuilder\Util
  */
-class ArgumentValidator{
+class ArgumentValidator
+{
 
 	/**
 	 * @param mixed $value
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public static function validateScalar($value)
 	{
 		if (!is_scalar($value)) {
 			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected a scalar value; got ' . $type);
+			throw new InvalidArgumentException('Expected a scalar value; got ' . $type);
 		}
 	}
 
 	/**
 	 * @param mixed $value
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public static function validateUnsignedInteger($value)
 	{
 		if (!is_int($value)) {
 			$type = is_object($value) ? get_class($value) : gettype($value);
-			throw new \InvalidArgumentException('Expected an unsigned integer; got ' . $type);
+			throw new InvalidArgumentException('Expected an unsigned integer; got ' . $type);
 		}
 		if ($value < 0) {
-			throw new \InvalidArgumentException('Expected an unsigned integer; got ' . $value);
+			throw new InvalidArgumentException('Expected an unsigned integer; got ' . $value);
 		}
 	}
 
 	/**
 	 * @param mixed $value
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public static function validateUnsignedIntegerOrNull($value)
 	{
@@ -50,13 +53,13 @@ class ArgumentValidator{
 
 	/**
 	 * @param mixed $value
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public static function validateEmpty($value)
 	{
 		$value = (string)$value;
 		if (empty($value)) {
-			throw new \InvalidArgumentException('Empty string is invalid');
+			throw new InvalidArgumentException('Empty string is invalid');
 		}
 	}
 

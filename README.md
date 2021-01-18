@@ -1,13 +1,13 @@
 # PHP String Builder
 
-[![Build Status](https://travis-ci.org/markenwerk/php-string-builder.svg?branch=master)](https://travis-ci.org/markenwerk/php-string-builder)
-[![Test Coverage](https://codeclimate.com/github/markenwerk/php-string-builder/badges/coverage.svg)](https://codeclimate.com/github/markenwerk/php-string-builder/coverage)
+[![Build Status](https://travis-ci.org/chroma-x/php-string-builder.svg?branch=master)](https://travis-ci.org/chroma-x/php-string-builder)
+[![Test Coverage](https://codeclimate.com/github/chroma-x/php-string-builder/badges/coverage.svg)](https://codeclimate.com/github/chroma-x/php-string-builder/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/57aa33adf27cc20050102f0e/badge.svg)](https://www.versioneye.com/user/projects/57aa33adf27cc20050102f0e)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/ec36917d-baa1-482c-8916-41e2a2c48d5c.svg)](https://insight.sensiolabs.com/projects/ec36917d-baa1-482c-8916-41e2a2c48d5c)
-[![Code Climate](https://codeclimate.com/github/markenwerk/php-string-builder/badges/gpa.svg)](https://codeclimate.com/github/markenwerk/php-string-builder)
-[![Latest Stable Version](https://poser.pugx.org/markenwerk/string-builder/v/stable)](https://packagist.org/packages/markenwerk/string-builder)
-[![Total Downloads](https://poser.pugx.org/markenwerk/string-builder/downloads)](https://packagist.org/packages/markenwerk/string-builder)
-[![License](https://poser.pugx.org/markenwerk/string-builder/license)](https://packagist.org/packages/markenwerk/string-builder)
+[![Code Climate](https://codeclimate.com/github/chroma-x/php-string-builder/badges/gpa.svg)](https://codeclimate.com/github/chroma-x/php-string-builder)
+[![Latest Stable Version](https://poser.pugx.org/chroma-x/string-builder/v/stable)](https://packagist.org/packages/chroma-x/string-builder)
+[![Total Downloads](https://poser.pugx.org/chroma-x/string-builder/downloads)](https://packagist.org/packages/chroma-x/string-builder)
+[![License](https://poser.pugx.org/chroma-x/string-builder/license)](https://packagist.org/packages/chroma-x/string-builder)
 
 A basic string builder library providing different string methods written in PHP.
 
@@ -16,7 +16,7 @@ A basic string builder library providing different string methods written in PHP
 ```{json}
 {
    	"require": {
-        "markenwerk/string-builder": "~1.0"
+        "chroma-x/string-builder": "~1.0"
     }
 }
 ```
@@ -32,7 +32,7 @@ require_once('path/to/vendor/autoload.php');
 ### Building and modifying a string
 
 ```{php}
-use Markenwerk\StringBuilder\StringBuilder;
+use ChromaX\StringBuilder\StringBuilder;
 
 $builder = new StringBuilder('rolod muspi meroL');
 $builder
@@ -121,7 +121,7 @@ will output the following
 All methods throw an `\InvalidArgumentException` if misconfigured except `indexOf` and `lastIndexOf` wich return `null` if the given subtring is not contained by the string to build.
 
 ```{php}
-use Markenwerk\StringBuilder\StringBuilder;
+use ChromaX\StringBuilder\StringBuilder;
 
 try {
 	$builder = new StringBuilder();
@@ -153,7 +153,7 @@ Exception with message    Position invalid
 ## Contribution
 
 Contributing to our projects is always very appreciated.  
-**But: please follow the contribution guidelines written down in the [CONTRIBUTING.md](https://github.com/markenwerk/php-string-builder/blob/master/CONTRIBUTING.md) document.**
+**But: please follow the contribution guidelines written down in the [CONTRIBUTING.md](https://github.com/chroma-x/php-string-builder/blob/master/CONTRIBUTING.md) document.**
 
 ## License
 

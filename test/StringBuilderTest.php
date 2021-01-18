@@ -2,7 +2,7 @@
 
 namespace Test;
 
-use Markenwerk\StringBuilder\StringBuilder;
+use ChromaX\StringBuilder\StringBuilder;
 
 /**
  * Class StringBuilderTest

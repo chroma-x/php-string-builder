@@ -16,7 +16,7 @@ class StringBuilder
 	/**
 	 * @var string
 	 */
-	private $string;
+	private $string = '';
 
 	/**
 	 * SimpleStringBuilder constructor
